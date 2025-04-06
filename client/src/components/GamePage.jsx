@@ -17,6 +17,7 @@ function GamePage() {
   const [startTime, setStartTime] = useState(null);
   const [duration, setDuration] = useState(null);
   const [playerName, setPlayerName] = useState('');
+  const [keyStatuses, setKeyStatuses] = useState({});
 
   useEffect(() => {
     if (!wordLength) return;
@@ -33,11 +34,22 @@ function GamePage() {
     fetchWord();
   }, [wordLength]);
 
-  useEffect(() => {
-    if (secretWord) {
-      console.log('Secret word is:', secretWord);
-    }
-  }, [secretWord]);
+  const updateKeyStatuses = (guess, feedback) => {
+    setKeyStatuses((prev) => {
+      const updated = { ...prev };
+      guess.split('').forEach((letter, i) => {
+        const status = feedback[i];
+        const current = updated[letter];
+
+        if (status === 'correct' || status === 'present') {
+          updated[letter] = 'correct';
+        } else if (!current) {
+          updated[letter] = 'absent';
+        }
+      });
+      return updated;
+    });
+  };
 
   const handleKeyPress = (key) => {
     if (gameOver) return;
@@ -46,6 +58,7 @@ function GamePage() {
     } else if (key === 'Enter') {
       if (currentGuess.length !== wordLength) return;
       const feedback = getFeedback(currentGuess, secretWord);
+      updateKeyStatuses(currentGuess, feedback);
       const newGuesses = [...guesses, currentGuess];
       const newFeedbackList = [...feedbackList, feedback];
       setGuesses(newGuesses);
@@ -83,6 +96,7 @@ function GamePage() {
     setWordLength(null);
     setDuration(null);
     setPlayerName('');
+    setKeyStatuses({});
   };
 
   if (!gameStarted) {
@@ -114,12 +128,11 @@ function GamePage() {
             <p>
               Attempts used: <strong>{guesses.length}</strong>
             </p>
-            {didWin && (
+            {didWin ? (
               <p>
                 Time: <strong>{duration} seconds</strong>
               </p>
-            )}
-            {!didWin && (
+            ) : (
               <p>
                 The correct word was: <strong>{secretWord}</strong>
               </p>
@@ -171,7 +184,7 @@ function GamePage() {
       )}
       {!gameOver && (
         <div className="keyboard-wrapper">
-          <Keyboard onKeyPress={handleKeyPress} />
+          <Keyboard onKeyPress={handleKeyPress} keyStatuses={keyStatuses} />
         </div>
       )}
     </>

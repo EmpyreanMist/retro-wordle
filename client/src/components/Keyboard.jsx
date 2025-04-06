@@ -1,14 +1,21 @@
-function Keyboard({ onKeyPress }) {
-  const rowOne = ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"];
-  const rowTwo = ["A", "S", "D", "F", "G", "H", "J", "K", "L"];
-  const rowThree = ["ENTER", "Z", "X", "C", "V", "B", "N", "M", "BACKSPACE"];
+function Keyboard({ onKeyPress, keyStatuses }) {
+  const rowOne = ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'];
+  const rowTwo = ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L'];
+  const rowThree = ['ENTER', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', 'BACKSPACE'];
+
+  const getKeyClass = (letter) => {
+    const status = keyStatuses?.[letter.toLowerCase()];
+    if (status === 'correct') return 'key correct';
+    if (status === 'absent') return 'key absent';
+    return 'key';
+  };
 
   return (
     <div className="keyboard">
       <div className="rowOne">
         {rowOne.map((letter) => (
           <button
-            className="key"
+            className={getKeyClass(letter)}
             key={letter}
             onClick={() => onKeyPress(letter)}
           >
@@ -19,7 +26,7 @@ function Keyboard({ onKeyPress }) {
       <div className="rowTwo">
         {rowTwo.map((letter) => (
           <button
-            className="key"
+            className={getKeyClass(letter)}
             key={letter}
             onClick={() => onKeyPress(letter)}
           >
@@ -29,11 +36,11 @@ function Keyboard({ onKeyPress }) {
       </div>
       <div className="rowThree">
         {rowThree.map((letter) => {
-          if (letter === "ENTER") {
+          if (letter === 'ENTER') {
             return (
               <button
                 key={letter}
-                onClick={() => onKeyPress("Enter")}
+                onClick={() => onKeyPress('Enter')}
                 className="key enter-key"
               >
                 ↵
@@ -41,11 +48,11 @@ function Keyboard({ onKeyPress }) {
             );
           }
 
-          if (letter === "BACKSPACE") {
+          if (letter === 'BACKSPACE') {
             return (
               <button
                 key={letter}
-                onClick={() => onKeyPress("Backspace")}
+                onClick={() => onKeyPress('Backspace')}
                 className="key backspace-key"
               >
                 ⌫
@@ -55,7 +62,7 @@ function Keyboard({ onKeyPress }) {
 
           return (
             <button
-              className="key"
+              className={getKeyClass(letter)}
               key={letter}
               onClick={() => onKeyPress(letter)}
             >

@@ -26,9 +26,17 @@
 }
 
 .cell.present {
-  background-color: rgb(219, 219, 113);
+  background-color: yellow;
 }
 
 .cell.absent {
-  background-color: grey;
+  background-color: red;
+}
+
+.absent {
+  background-color: red;
+}
+
+.correct {
+  background-color: green;
 }
