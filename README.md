@@ -15,7 +15,7 @@ A fullstack word game inspired by wordle - built with React, Node.js and MongoDB
 
 ---
 
-##Tech stack
+## Tech stack
 
 ### Frontend (`/client`)
 
