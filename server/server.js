@@ -28,6 +28,7 @@ app.set('views', path.join(__dirname, 'views'));
 // Middleware
 app.use(cors());
 app.use(express.json());
+app.use(express.static(path.join(__dirname, '../client/dist')));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Routes
@@ -52,12 +53,11 @@ app.get('/scoreboard', async (req, res) => {
   }
 });
 
-app.use(express.static(path.join(__dirname, '../client/dist')));
-
 app.get('*', (req, res) => {
+  console.log('Sending frontend index.html');
   res.sendFile(path.join(__dirname, '../client/dist/index.html'));
 });
 
 app.listen(port, () => {
-  console.log(`🚀 Server running on http://localhost:${port}`);
+  console.log(`Server running on http://localhost:${port}`);
 });
