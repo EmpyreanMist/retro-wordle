@@ -9,13 +9,13 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const app = express();
-const port = 5080;
+const port = process.env.PORT || 5080;
 
 // __dirname och __filename för ES-modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// MongoDB Atlas-anslutning
+// MongoDB Atlas Connection
 mongoose
   .connect(process.env.MONGODB_URI)
   .then(() => console.log(' Connected to MongoDB Atlas'))
@@ -52,7 +52,12 @@ app.get('/scoreboard', async (req, res) => {
   }
 });
 
-// Starta servern
+app.use(express.static(path.join(__dirname, '../client/dist')));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/dist/index.html'));
+});
+
 app.listen(port, () => {
   console.log(`🚀 Server running on http://localhost:${port}`);
 });
