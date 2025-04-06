@@ -18,6 +18,7 @@ function GamePage() {
   const [duration, setDuration] = useState(null);
   const [playerName, setPlayerName] = useState('');
   const [keyStatuses, setKeyStatuses] = useState({});
+  const [scoreSubmitted, setScoreSubmitted] = useState(false);
 
   useEffect(() => {
     if (!wordLength) return;
@@ -97,6 +98,7 @@ function GamePage() {
     setDuration(null);
     setPlayerName('');
     setKeyStatuses({});
+    setScoreSubmitted(false);
   };
 
   if (!gameStarted) {
@@ -148,7 +150,7 @@ function GamePage() {
       </div>
       {gameOver && (
         <div className="score-form">
-          {didWin && (
+          {didWin && !scoreSubmitted && (
             <>
               <label htmlFor="name">Enter your name:</label>
               <input
@@ -160,28 +162,48 @@ function GamePage() {
               />
               <button
                 className="submit-score-btn"
-                onClick={() => {
-                  fetch('/api/highscore', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                      name: playerName,
-                      guesses: guesses.length,
-                      wordLength,
-                      timeInSeconds: duration,
-                    }),
-                  }).then(() => alert('Score submitted!'));
+                onClick={async () => {
+                  try {
+                    const res = await fetch('/api/highscore', {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify({
+                        name: playerName,
+                        guesses: guesses.length,
+                        wordLength,
+                        timeInSeconds: duration,
+                      }),
+                    });
+
+                    if (!res.ok) {
+                      const error = await res.json();
+                      throw new Error(error.message || 'Unknown error');
+                    }
+
+                    setScoreSubmitted(true);
+                  } catch (err) {
+                    console.error('Error submitting score:', err);
+                    alert('Could not submit score. Please try again.');
+                  }
                 }}
               >
                 Submit Score
               </button>
             </>
           )}
+
+          {didWin && scoreSubmitted && (
+            <p className="submitted-message">
+              Your score has been submitted to the scoreboard!
+            </p>
+          )}
+
           <button className="play-again-btn" onClick={resetGame}>
             Play again
           </button>
         </div>
       )}
+
       {!gameOver && (
         <div className="keyboard-wrapper">
           <Keyboard onKeyPress={handleKeyPress} keyStatuses={keyStatuses} />
