@@ -13,7 +13,7 @@ function Header() {
             <Link to="/">Play Wordle</Link>
           </li>
           <li>
-            <a href="http://localhost:5080/scoreboard">Scoreboard</a>
+            <a href="/scoreboard">Scoreboard</a>
           </li>
         </ul>
       </nav>
