@@ -5,7 +5,6 @@ import { fileURLToPath } from 'url';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 
-// Ladda .env först
 dotenv.config();
 
 const app = express();
@@ -28,8 +27,6 @@ app.set('views', path.join(__dirname, 'views'));
 // Middleware
 app.use(cors());
 app.use(express.json());
-app.use(express.static(path.join(__dirname, '../client/dist')));
-app.use(express.static(path.join(__dirname, 'public')));
 
 // Routes
 import highScoreRoute from './routes/highScoreRoute.js';
@@ -53,6 +50,11 @@ app.get('/scoreboard', async (req, res) => {
   }
 });
 
+// Static files
+app.use(express.static(path.join(__dirname, '../client/dist')));
+app.use(express.static(path.join(__dirname, 'public')));
+
+// React fallback
 app.get('*', (req, res) => {
   console.log('Sending frontend index.html');
   res.sendFile(path.join(__dirname, '../client/dist/index.html'));
