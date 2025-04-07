@@ -10,7 +10,7 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 5080;
 
-// __dirname och __filename för ES-modules
+// __dirname och __filename for ES-modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -51,13 +51,13 @@ app.get('/scoreboard', async (req, res) => {
 });
 
 // Static files
-app.use(express.static(path.join(__dirname, '..', 'client', 'dist')));
+app.use(express.static(path.resolve(__dirname, '../client/dist')));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // React fallback
 app.get('*', (req, res) => {
   console.log('Sending frontend index.html');
-  res.sendFile(path.join(__dirname, '..', 'client', 'dist', 'index.html'));
+  res.sendFile(path.resolve(__dirname, '../client/dist/index.html'));
 });
 
 app.listen(port, () => {
