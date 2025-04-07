@@ -1,6 +1,6 @@
 {
   "name": "fullstack-wordle",
   "version": "1.0.0",
-  "description": "Deployment root for the Fullstack Wordle project",
+  "description": "Deployment root for the Fullstack Wordle project.",
   "license": "ISC"
 }
