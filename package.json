@@ -1,6 +1,6 @@
 {
   "name": "fullstack-wordle",
   "version": "1.0.0",
-  "description": "Dummy file so Railway loads Node.js",
+  "description": "Deployment root for the Fullstack Wordle project",
   "license": "ISC"
 }
