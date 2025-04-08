@@ -15,7 +15,7 @@ A fullstack word game inspired by wordle - built with React, Node.js and MongoDB
 
 ---
 
-**Live version:**
+**Play on the live version now:**
 https://christians-wordle.up.railway.app/
 
 ## Tech stack
@@ -74,3 +74,4 @@ npm start
 
 - Responsive mobile design
 - SSR 404 response with EJS
+- Display the word on SSR page
