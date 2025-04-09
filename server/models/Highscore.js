@@ -1,15 +1,11 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 const highScoreSchema = new mongoose.Schema({
-  name: String,
-  guesses: Number,
-  wordLength: Number,
-  timeInSeconds: Number,
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
+  name: { type: String, required: true },
+  guesses: { type: Number, required: true },
+  timeInSeconds: { type: Number, required: true },
+  wordLength: { type: Number, required: true },
+  createdAt: { type: Date, default: Date.now },
 });
 
-const HighScore = mongoose.model('HighScore', highScoreSchema);
-export default HighScore;
+export default mongoose.model("HighScore", highScoreSchema);
