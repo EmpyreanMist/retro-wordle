@@ -1,30 +1,17 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import "../styles/header.css";
 
 function Header() {
-  const [menuOpen, setMenuOpen] = useState(false);
-
   return (
     <header className="header">
       <div className="header-container">
-        <button
-          className={`hamburger ${menuOpen ? "open" : ""}`}
-          onClick={() => setMenuOpen((prev) => !prev)}
-          aria-label="Toggle menu"
-        >
-          <span className="bar top-bar" />
-          <span className="bar middle-bar" />
-          <span className="bar bottom-bar" />
-        </button>
-
-        <nav className={`header-nav ${menuOpen ? "open" : ""}`}>
-          <ul onClick={() => setMenuOpen(false)}>
+        <nav className="header-nav">
+          <ul>
             <li>
-              <Link to="/info">Info Page</Link>
+              <NavLink to="/info">Info Page</NavLink>
             </li>
             <li>
-              <Link to="/">Play Wordle</Link>
+              <NavLink to="/">Play Wordle</NavLink>
             </li>
             <li>
               <a href="/scoreboard">Scoreboard</a>
