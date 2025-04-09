@@ -43,7 +43,11 @@ app.get("/scoreboard", async (req, res) => {
       guesses: 1,
       timeInSeconds: 1,
     });
-    res.render("scoreboard", { scores });
+
+    res.render("scoreboard", {
+      scores,
+      currentPath: req.path,
+    });
   } catch (error) {
     console.error("Failed to load scores:", error);
     res.status(500).send("Could not load scoreboard.");

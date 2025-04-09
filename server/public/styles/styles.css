@@ -28,7 +28,7 @@ h1 {
 
 * {
   box-sizing: border-box;
-  font-family: 'Press Start 2P', system-ui;
+  font-family: "Press Start 2P", system-ui;
   color: aliceblue;
 }
 
@@ -77,4 +77,10 @@ th {
   justify-content: space-evenly;
   font-size: 1.5rem;
   margin-bottom: 0.5rem;
+}
+
+a.active {
+  color: #28a745;
+  text-decoration: underline;
+  text-decoration-color: #28a745;
 }
