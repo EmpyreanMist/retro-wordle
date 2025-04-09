@@ -27,7 +27,7 @@ function Header() {
               <Link to="/">Play Wordle</Link>
             </li>
             <li>
-              <Link to="/scoreboard">Scoreboard</Link>
+              <a href="/scoreboard">Scoreboard</a>
             </li>
           </ul>
         </nav>
