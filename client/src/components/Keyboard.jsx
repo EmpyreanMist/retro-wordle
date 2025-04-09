@@ -1,13 +1,13 @@
 function Keyboard({ onKeyPress, keyStatuses }) {
-  const rowOne = ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'];
-  const rowTwo = ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L'];
-  const rowThree = ['ENTER', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', 'BACKSPACE'];
+  const rowOne = ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"];
+  const rowTwo = ["A", "S", "D", "F", "G", "H", "J", "K", "L"];
+  const rowThree = ["ENTER", "Z", "X", "C", "V", "B", "N", "M", "BACKSPACE"];
 
   const getKeyClass = (letter) => {
     const status = keyStatuses?.[letter.toLowerCase()];
-    if (status === 'correct') return 'key correct';
-    if (status === 'absent') return 'key absent';
-    return 'key';
+    if (status === "correct") return "key correct";
+    if (status === "absent") return "key absent";
+    return "key";
   };
 
   return (
@@ -36,11 +36,11 @@ function Keyboard({ onKeyPress, keyStatuses }) {
       </div>
       <div className="rowThree">
         {rowThree.map((letter) => {
-          if (letter === 'ENTER') {
+          if (letter === "ENTER") {
             return (
               <button
                 key={letter}
-                onClick={() => onKeyPress('Enter')}
+                onClick={() => onKeyPress("Enter")}
                 className="key enter-key"
               >
                 ↵
@@ -48,11 +48,11 @@ function Keyboard({ onKeyPress, keyStatuses }) {
             );
           }
 
-          if (letter === 'BACKSPACE') {
+          if (letter === "BACKSPACE") {
             return (
               <button
                 key={letter}
-                onClick={() => onKeyPress('Backspace')}
+                onClick={() => onKeyPress("Backspace")}
                 className="key backspace-key"
               >
                 ⌫
