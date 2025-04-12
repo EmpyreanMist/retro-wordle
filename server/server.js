@@ -37,22 +37,33 @@ import HighScore from "./models/Highscore.js";
 
 app.get("/scoreboard", async (req, res) => {
   try {
-    const { length } = req.query;
+    const pageSize = 15;
+    const page = parseInt(req.query.page, 10) || 1;
+    const length = parseInt(req.query.length, 10) || null;
+
     const filter = {};
 
     if (length) {
-      filter.wordLength = parseInt(length, 10);
+      filter.wordLength = length;
     }
 
-    const scores = await HighScore.find(filter).sort({
-      guesses: 1,
-      timeInSeconds: 1,
-    });
+    const totalScores = await HighScore.countDocuments(filter);
+    const totalPages = Math.ceil(totalScores / pageSize);
+
+    const scores = await HighScore.find(filter)
+      .sort({
+        guesses: 1,
+        timeInSeconds: 1,
+      })
+      .skip((page - 1) * pageSize)
+      .limit(pageSize);
 
     res.render("scoreboard", {
       scores,
       currentPath: req.path,
       selectedLength: length,
+      currentPage: page,
+      totalPages,
     });
   } catch (error) {
     console.error("Failed to load scores:", error);
