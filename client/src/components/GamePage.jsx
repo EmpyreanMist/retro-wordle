@@ -179,12 +179,13 @@ function GamePage() {
                 className="submit-score-btn"
                 onClick={async () => {
                   try {
-                    const res = await axios.post("/api/highscore", {
-                      name: playerName,
-                      guesses: guesses.length,
-                      wordLength,
-                      timeInSeconds: duration,
-                    });
+                    const res = await axios.post(
+                      `/api/games/${gameId}/highscore`,
+                      {
+                        name: playerName,
+                      }
+                    );
+
                     if (res.status === 201) {
                       setScoreSubmitted(true);
                     }

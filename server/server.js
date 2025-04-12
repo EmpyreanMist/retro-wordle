@@ -29,10 +29,8 @@ app.use(cors());
 app.use(express.json());
 
 // Routes
-import highScoreRoute from "./routes/highScoreRoute.js";
 import secureGameRoute from "./routes/secureGameRoute.js";
 
-app.use("/api/highscore", highScoreRoute);
 app.use("/api/games", secureGameRoute);
 
 import HighScore from "./models/Highscore.js";

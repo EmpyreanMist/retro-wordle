@@ -56,6 +56,7 @@ router.post("/:id/highscore", async (req, res) => {
     guesses: game.guesses.length,
     timeInSeconds: duration,
     wordLength: game.word.length,
+    word: game.word,
   });
 
   await newScore.save();
