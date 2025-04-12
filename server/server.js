@@ -37,7 +37,14 @@ import HighScore from "./models/Highscore.js";
 
 app.get("/scoreboard", async (req, res) => {
   try {
-    const scores = await HighScore.find().sort({
+    const { length } = req.query;
+    const filter = {};
+
+    if (length) {
+      filter.wordLength = parseInt(length, 10);
+    }
+
+    const scores = await HighScore.find(filter).sort({
       guesses: 1,
       timeInSeconds: 1,
     });
@@ -45,6 +52,7 @@ app.get("/scoreboard", async (req, res) => {
     res.render("scoreboard", {
       scores,
       currentPath: req.path,
+      selectedLength: length,
     });
   } catch (error) {
     console.error("Failed to load scores:", error);

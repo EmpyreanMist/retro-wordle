@@ -84,3 +84,16 @@ a.active {
   text-decoration: underline;
   text-decoration-color: #28a745;
 }
+
+form {
+  display: flex;
+  justify-content: center;
+}
+
+select {
+  background: none;
+}
+
+option {
+  background-color: #333;
+}
