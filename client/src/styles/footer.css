@@ -4,3 +4,16 @@
   font-size: 1.5rem;
   margin-bottom: 0.5rem;
 }
+
+footer a {
+  color: white;
+  transition: color 0.3s ease;
+}
+
+footer a:hover {
+  color: #28a745;
+}
+
+.icons i {
+  color: inherit;
+}

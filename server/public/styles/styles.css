@@ -1,18 +1,31 @@
 html,
 body {
   height: 100%;
-  padding: 0;
   margin: 0;
-  overflow: hidden;
+  padding: 0;
 }
+
 body {
   background: linear-gradient(145deg, #3a3737, #1e1d1d);
+  font-family: "Press Start 2P", system-ui;
+  color: aliceblue;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 #container {
-  min-height: 100%;
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
+}
+
+#page {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
 h1 {
@@ -20,22 +33,11 @@ h1 {
   text-align: center;
 }
 
-#page {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
-* {
-  box-sizing: border-box;
-  font-family: "Press Start 2P", system-ui;
-  color: aliceblue;
-}
-
 .header-nav ul {
   display: flex;
   justify-content: space-evenly;
   font-size: large;
+  padding: 0;
 }
 
 .header-nav li {
@@ -57,28 +59,6 @@ nav a:hover {
   text-decoration: underline;
 }
 
-table {
-  margin: auto;
-  margin-top: 3rem;
-  border-collapse: collapse;
-  width: 80%;
-}
-th,
-td {
-  border: 1px solid #444;
-  padding: 0.5rem 1rem;
-}
-th {
-  background: #222;
-}
-
-.icons {
-  display: flex;
-  justify-content: space-evenly;
-  font-size: 1.5rem;
-  margin-bottom: 0.5rem;
-}
-
 a.active {
   color: #28a745;
   text-decoration: underline;
@@ -88,32 +68,56 @@ a.active {
 form {
   display: flex;
   justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
 }
 
 select {
   background: none;
+  color: aliceblue;
+  border: 1px solid #444;
+  padding: 0.25rem;
 }
 
 option {
   background-color: #333;
+  color: white;
+}
+
+table {
+  margin: 3rem auto 2rem auto;
+  border-collapse: collapse;
+  width: 80%;
+}
+
+th,
+td {
+  border: 1px solid #444;
+  padding: 0.5rem 1rem;
+}
+
+th {
+  background: #222;
 }
 
 .pagination {
   display: flex;
   justify-content: center;
   gap: 0.5rem;
-  margin-top: 2rem;
+  margin-bottom: 2rem;
   flex-wrap: wrap;
 }
 
 .pagination a {
-  margin-bottom: 2rem;
   padding: 0.5rem 0.75rem;
   text-decoration: none;
   border: 1px solid #ccc;
   border-radius: 4px;
   font-weight: 500;
   transition: background-color 0.2s ease;
+  color: aliceblue;
 }
 
 .pagination a:hover {
@@ -124,4 +128,106 @@ option {
   background-color: #222;
   color: #28a745;
   font-weight: bold;
+}
+
+footer {
+  margin-top: auto;
+  padding-top: 2rem;
+  text-align: center;
+}
+
+footer a {
+  color: white;
+  transition: color 0.3s ease;
+}
+
+footer a:hover {
+  color: #28a745;
+}
+
+.icons {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+  .header-nav ul {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 0;
+    font-size: 1rem;
+  }
+
+  .header-nav li {
+    text-align: center;
+    margin-top: 1rem;
+  }
+
+  .header-nav li a {
+    color: white;
+    text-decoration: underline;
+    font-weight: bold;
+  }
+
+  .header-nav li a:hover {
+    color: #28a745;
+  }
+
+  .header-nav li a.active {
+    color: #28a745;
+  }
+
+  table {
+    display: block;
+    width: 100%;
+    border: none;
+    margin: 2rem auto;
+  }
+
+  table thead {
+    display: none;
+  }
+
+  table tbody {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  table tr {
+    display: block;
+    width: 90%;
+    background: #2a2a2a;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #444;
+  }
+
+  table td {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.75rem;
+    border-bottom: 1px solid #333;
+  }
+
+  table td::before {
+    content: attr(data-label);
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-right: 1rem;
+    flex-shrink: 0;
+  }
+
+  table td:last-child {
+    border-bottom: none;
+  }
+
+  .pagination {
+    margin-top: 1rem;
+  }
 }

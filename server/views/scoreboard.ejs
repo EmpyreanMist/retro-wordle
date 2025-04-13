@@ -65,15 +65,16 @@
           <tbody>
             <% scores.forEach((s, i) => { %>
             <tr>
-              <td><%= (currentPage - 1) * 15 + i + 1 %></td>
-              <td><%= s.name %></td>
-              <td><%= s.guesses %></td>
-              <td><%= s.wordLength %></td>
-              <td><%= s.timeInSeconds %>s</td>
-              <td><%= s.word %></td>
+              <td data-label="#"> <%= (currentPage - 1) * 15 + i + 1 %> </td>
+              <td data-label="Name"> <%= s.name %> </td>
+              <td data-label="Guesses"> <%= s.guesses %> </td>
+              <td data-label="Word Length"> <%= s.wordLength %> </td>
+              <td data-label="Time"> <%= s.timeInSeconds %>s </td>
+              <td data-label="Word"> <%= s.word %> </td>
             </tr>
             <% }) %>
           </tbody>
+          
         </table>
 
         <div class="pagination">
