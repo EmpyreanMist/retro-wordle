@@ -6,12 +6,12 @@ A fullstack word game inspired by wordle - built with React, Node.js and MongoDB
 
 ## Features
 
-- Play Wordle with word length of your choice
-- Keyboard feedback with color-coded hints
-- Submit your score with name and timer
-- View scoreboard with filtering and pagination
+- Play Wordle with a custom word length (3-10 letters)
+- Keyboard feedback with color-coded hints (gray, yellow, green)
+- Timer and name entry for highscore submission
+- Scoreboard with filtering by word length and pagination
 - Server-side rendered screboard using EJS
-- MongoDB for persistent highscore storage
+- MongoDB for persistent score storage
 
 ---
 
@@ -34,11 +34,11 @@ https://christians-wordle.up.railway.app/
 
 ### API Routes
 
-| Method | Endpoint         | Description                             |
-| ------ | ---------------- | --------------------------------------- |
-| GET    | `/api/word`      | Returns a random word (query: `length`) |
-| POST   | `/api/highscore` | Submits a new highscore                 |
-| GET    | `/scoreboard`    | Renders the scoreboard page (SSR)       |
+| Method | Endpoint         | Description                        |
+| ------ | ---------------- | ---------------------------------- |
+| GET    | `/api/games`     | Recives guess and returns feedback |
+| POST   | `/api/highscore` | Submits a new highscore to MongoDB |
+| GET    | `/scoreboard`    | Renders the scoreboard page (SSR)  |
 
 ---
 
@@ -54,7 +54,7 @@ In bash:
 
 ```bash
 git clone https://github.com/EmpyreanMist/fullstack-wordle.git
-cd fullstack-wordle/server
+cd server
 npm install
 ```
 
@@ -69,9 +69,3 @@ MONGODB_URI=your-mongodb-atlas-connection-string
 ```bash
 npm start
 ```
-
-## To Do / Ideas
-
-- Responsive mobile design
-- SSR 404 response with EJS
-- Display the word on SSR page
