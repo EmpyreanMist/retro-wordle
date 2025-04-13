@@ -20,12 +20,17 @@ function GamePage() {
   const [keyStatuses, setKeyStatuses] = useState({});
   const [scoreSubmitted, setScoreSubmitted] = useState(false);
   const [secretWord, setSecretWord] = useState(null);
+  const [allowDuplicates, setAllowDuplicates] = useState(true);
 
-  const startNewGame = async (length) => {
+  const startNewGame = async (length, allowDupes) => {
     try {
-      const res = await axios.post("/api/games", { length });
+      const res = await axios.post("/api/games", {
+        length,
+        allowDuplicates: allowDupes,
+      });
       setGameId(res.data.id);
       setWordLength(length);
+      setAllowDuplicates(allowDupes);
       setStartTime(Date.now());
     } catch (err) {
       console.error("Failed to start game:", err);
@@ -35,17 +40,14 @@ function GamePage() {
   const updateKeyStatuses = (guess, feedback) => {
     setKeyStatuses((prev) => {
       const updated = { ...prev };
-
       guess.split("").forEach((letter, i) => {
         const status = feedback[i];
-
         if (status === "correct" || status === "present") {
           updated[letter] = "correct";
         } else if (!updated[letter]) {
           updated[letter] = "absent";
         }
       });
-
       return updated;
     });
   };
@@ -127,7 +129,13 @@ function GamePage() {
     return <StartScreen startGame={() => setGameStarted(true)} />;
 
   if (wordLength === null)
-    return <WordLengthSelector onConfirm={startNewGame} />;
+    return (
+      <WordLengthSelector
+        onConfirm={(length, allowDupes) => {
+          startNewGame(length, allowDupes);
+        }}
+      />
+    );
 
   if (!gameId) return <p>Loading...</p>;
 
@@ -139,6 +147,10 @@ function GamePage() {
             <h2>{didWin ? "🎉 You won!" : "💀 Game Over"}</h2>
             <p>
               Word length: <strong>{wordLength}</strong>
+            </p>
+            <p>
+              Allow duplicates:{" "}
+              <strong>{allowDuplicates ? "Yes" : "No"}</strong>
             </p>
             <p>
               Attempts used: <strong>{guesses.length}</strong>
@@ -155,6 +167,7 @@ function GamePage() {
             )}
           </div>
         )}
+
         <GameBoard
           wordLength={wordLength}
           guesses={guesses}

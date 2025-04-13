@@ -10,13 +10,15 @@ const games = {}; // { [gameId]: { word, guesses, startTime } }
 // Start new game
 router.post("/", (req, res) => {
   const length = parseInt(req.body.length, 10);
-  const word = getRandomWord(length);
+  const allowDuplicates = req.body.allowDuplicates;
+  const word = getRandomWord(length, allowDuplicates);
 
   const id = uuidv4();
   games[id] = {
     word,
     guesses: [],
     startTime: Date.now(),
+    allowDuplicates,
   };
 
   res.status(201).json({ id });
@@ -57,6 +59,7 @@ router.post("/:id/highscore", async (req, res) => {
     timeInSeconds: duration,
     wordLength: game.word.length,
     word: game.word,
+    allowDuplicates: game.allowDuplicates,
   });
 
   await newScore.save();

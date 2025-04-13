@@ -30,8 +30,7 @@
                 <a
                   href="/scoreboard"
                   class="<%= currentPath === '/scoreboard' ? 'active' : '' %>"
-                  >Scoreboard</a
-                >
+                >Scoreboard</a>
               </li>
             </ul>
           </nav>
@@ -39,7 +38,8 @@
 
         <h1>🏆 Scoreboard</h1>
 
-        <form method="get" action="/scoreboard">
+        <form method="get" action="/scoreboard" class="filter-form">
+
           <label for="length">Filter by word length:</label>
           <select name="length" id="length" onchange="this.form.submit()">
             <option value="">All</option>
@@ -49,7 +49,19 @@
               </option>
             <% } %>
           </select>
-        </form>        
+
+          <label for="unique">
+            <input
+              type="checkbox"
+              id="unique"
+              name="unique"
+              value="true"
+              onchange="this.form.submit()"
+              <%= selectedUnique === "true" ? "checked" : "" %>
+            />
+            Show unique letters
+          </label>
+        </form>
 
         <table>
           <thead>
@@ -58,42 +70,42 @@
               <th>Name</th>
               <th>Guesses</th>
               <th>Word Length</th>
+              <th>Duplicates?</th>
               <th>Time</th>
               <th>Word</th>
             </tr>
           </thead>
           <tbody>
             <% scores.forEach((s, i) => { %>
-            <tr>
-              <td data-label="#"> <%= (currentPage - 1) * 15 + i + 1 %> </td>
-              <td data-label="Name"> <%= s.name %> </td>
-              <td data-label="Guesses"> <%= s.guesses %> </td>
-              <td data-label="Word Length"> <%= s.wordLength %> </td>
-              <td data-label="Time"> <%= s.timeInSeconds %>s </td>
-              <td data-label="Word"> <%= s.word %> </td>
-            </tr>
+              <tr>
+                <td data-label="#"> <%= (currentPage - 1) * 15 + i + 1 %> </td>
+                <td data-label="Name"> <%= s.name %> </td>
+                <td data-label="Guesses"> <%= s.guesses %> </td>
+                <td data-label="Word Length"> <%= s.wordLength %> </td>
+                <td data-label="Duplicates?"> <%= s.allowDuplicates ? "Yes" : "No" %> </td>
+                <td data-label="Time"> <%= s.timeInSeconds %>s </td>
+                <td data-label="Word"> <%= s.word %> </td>
+              </tr>
             <% }) %>
           </tbody>
-          
         </table>
 
         <div class="pagination">
           <% if (currentPage > 1) { %>
-            <a href="/scoreboard?<%= selectedLength ? 'length=' + selectedLength + '&' : '' %>page=<%= currentPage - 1 %>">← Previous</a>
+            <a href="/scoreboard?<%= selectedLength ? 'length=' + selectedLength + '&' : '' %><%= selectedUnique === 'true' ? 'unique=true&' : '' %>page=<%= currentPage - 1 %>">← Previous</a>
           <% } %>
-        
+
           <% for (let i = 1; i <= totalPages; i++) { %>
-            <a href="/scoreboard?<%= selectedLength ? 'length=' + selectedLength + '&' : '' %>page=<%= i %>"
+            <a href="/scoreboard?<%= selectedLength ? 'length=' + selectedLength + '&' : '' %><%= selectedUnique === 'true' ? 'unique=true&' : '' %>page=<%= i %>"
                class="<%= i === currentPage ? 'active-page' : '' %>">
               <%= i %>
             </a>
           <% } %>
-        
+
           <% if (currentPage < totalPages) { %>
-            <a href="/scoreboard?<%= selectedLength ? 'length=' + selectedLength + '&' : '' %>page=<%= currentPage + 1 %>">Next →</a>
+            <a href="/scoreboard?<%= selectedLength ? 'length=' + selectedLength + '&' : '' %><%= selectedUnique === 'true' ? 'unique=true&' : '' %>page=<%= currentPage + 1 %>">Next →</a>
           <% } %>
         </div>
-        
 
         <footer>
           <hr />
@@ -113,11 +125,7 @@
               <i class="fa-brands fa-linkedin" aria-hidden="true"></i>
             </a>
             <a href="mailto:christianfryksten1@gmail.com">
-              <i
-                class="fa-solid fa-envelope"
-                aria-hidden="true"
-                aria-label="Skicka en e-post till Christian"
-              ></i>
+              <i class="fa-solid fa-envelope" aria-hidden="true"></i>
             </a>
           </div>
         </footer>

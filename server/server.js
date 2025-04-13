@@ -39,22 +39,26 @@ app.get("/scoreboard", async (req, res) => {
   try {
     const pageSize = 15;
     const page = parseInt(req.query.page, 10) || 1;
-    const length = parseInt(req.query.length, 10) || null;
+    const length = parseInt(req.query.length, 10);
+    const unique = req.query.unique; // 👈 Lägg till denna rad
 
     const filter = {};
 
-    if (length) {
+    if (!isNaN(length)) {
       filter.wordLength = length;
+    }
+
+    if (unique === "true") {
+      filter.allowDuplicates = false;
+    } else if (unique === "false") {
+      filter.allowDuplicates = true;
     }
 
     const totalScores = await HighScore.countDocuments(filter);
     const totalPages = Math.ceil(totalScores / pageSize);
 
     const scores = await HighScore.find(filter)
-      .sort({
-        guesses: 1,
-        timeInSeconds: 1,
-      })
+      .sort({ guesses: 1, timeInSeconds: 1 })
       .skip((page - 1) * pageSize)
       .limit(pageSize);
 
@@ -62,6 +66,7 @@ app.get("/scoreboard", async (req, res) => {
       scores,
       currentPath: req.path,
       selectedLength: length,
+      selectedUnique: unique,
       currentPage: page,
       totalPages,
     });

@@ -231,3 +231,26 @@ footer a:hover {
     margin-top: 1rem;
   }
 }
+
+.filter-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.filter-form label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.filter-form input[type="checkbox"] {
+  width: 1.2rem;
+  height: 1.2rem;
+  accent-color: #28a745;
+  cursor: pointer;
+}

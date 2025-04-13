@@ -111,7 +111,7 @@ main {
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
   font-size: 1rem;
-  width: 4rem;
+  width: 6rem;
   text-align: center;
 }
 
@@ -129,10 +129,18 @@ main {
 
 .word-length-selector {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
   gap: 1rem;
-  margin-top: 2rem;
+  align-items: flex-start;
+  margin: 1rem auto;
+  width: fit-content;
+}
+
+.word-length-selector input[type="checkbox"] {
+  width: 1.2rem;
+  height: 1.2rem;
+  accent-color: #28a745;
+  cursor: pointer;
 }
 
 .name-input {

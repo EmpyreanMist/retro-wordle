@@ -5,6 +5,7 @@ const highScoreSchema = new mongoose.Schema({
   guesses: { type: Number, required: true },
   timeInSeconds: { type: Number, required: true },
   wordLength: { type: Number, required: true },
+  allowDuplicates: { type: Boolean, required: true },
   createdAt: { type: Date, default: Date.now },
   word: String,
 });
