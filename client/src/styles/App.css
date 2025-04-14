@@ -53,11 +53,11 @@ main {
   width: 10rem;
   height: 8rem;
   border-radius: 1rem;
-  background-color: #28a745;
   font-size: large;
   color: white;
   border: none;
-  box-shadow: 0 5px #1c7c31;
+  background-color: #1e7e34;
+  box-shadow: 0 5px #145c2c;
   transition: transform 0.1s ease, box-shadow 0.1s ease;
   animation: pulse 2s infinite;
 }
