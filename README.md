@@ -7,6 +7,7 @@ A fullstack word game inspired by wordle - built with React, Node.js and MongoDB
 ## Features
 
 - Play Wordle with a custom word length (3-10 letters)
+- 6 attempts to guess the correct word
 - Keyboard feedback with color-coded hints (gray, yellow, green)
 - Timer and name entry for highscore submission
 - Scoreboard with filtering by word length and pagination
@@ -16,7 +17,7 @@ A fullstack word game inspired by wordle - built with React, Node.js and MongoDB
 ---
 
 **Play on the live version now:**
-https://christians-wordle.up.railway.app/
+https://retro-wordle.up.railway.app/
 
 ## Tech stack
 
@@ -24,13 +25,15 @@ https://christians-wordle.up.railway.app/
 
 - React
 - Vite
+- CSS modules
 
 ### Backend (`/server`)
 
 - Express
-- MongoDB + Mongoose
+- MongoDB with Mongoose
 - EJS (SSR scoreboard)
-- Cors
+- Node.js
+
 
 ### API Routes
 
@@ -41,10 +44,6 @@ https://christians-wordle.up.railway.app/
 | GET    | `/scoreboard`    | Renders the scoreboard page (SSR)  |
 
 ---
-
-## Tests
-
-The `/tests` folder will contain all automated tests for this project.
 
 ## Run it Locally
 

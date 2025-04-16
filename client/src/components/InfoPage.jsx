@@ -4,7 +4,7 @@ function InfoPage() {
   const infoList = [
     'Choose a word length between 3 and 10 letters before starting the game.',
     'You have 6 attempts to guess the hidden word',
-    'After each guess, the tiles give you feedback on how accurate your guess was:',
+    'After each guess, the tiles give you feedback on your input:',
     'Grey: The letter is not in the word.',
     'Yellow: The letter is in the word, but in the wrong position.',
     'Green: The letter is correct and on the right position.',
