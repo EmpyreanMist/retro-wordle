@@ -9,7 +9,6 @@ function MusicController() {
   const [volume, setVolume] = useState(0.1);
   const [showSlider, setShowSlider] = useState(false);
 
-  // Autoplay på första interaktion
   useEffect(() => {
     const handleUserInteraction = () => {
       if (audioRef.current) {
@@ -28,7 +27,6 @@ function MusicController() {
     };
   }, []);
 
-  // Uppdatera volym vid förändring
   useEffect(() => {
     if (audioRef.current) {
       audioRef.current.volume = volume;
@@ -48,7 +46,6 @@ function MusicController() {
     setIsPlaying(!isPlaying);
   };
 
-  // Avgör om vi är på mobil (enkel check)
   const isMobile = window.innerWidth <= 768;
 
   return (
