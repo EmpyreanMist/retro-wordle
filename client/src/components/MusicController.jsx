@@ -1,12 +1,15 @@
 import { useEffect, useRef, useState } from "react";
 import BackgroundMusic from "./BackgroundMusic";
 import ToggleMusic from "./ToggleMusic";
+import VolumeSlider from "./VolumeSlider";
 
 function MusicController() {
   const audioRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [volume, setVolume] = useState(0.1);
+  const [showSlider, setShowSlider] = useState(false);
 
-  // Autoplays on action
+  // Autoplay på första interaktion
   useEffect(() => {
     const handleUserInteraction = () => {
       if (audioRef.current) {
@@ -20,11 +23,17 @@ function MusicController() {
     };
 
     document.addEventListener("click", handleUserInteraction);
-
     return () => {
       document.removeEventListener("click", handleUserInteraction);
     };
   }, []);
+
+  // Uppdatera volym vid förändring
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.volume = volume;
+    }
+  }, [volume]);
 
   const toggleMusic = () => {
     if (!audioRef.current) return;
@@ -39,10 +48,30 @@ function MusicController() {
     setIsPlaying(!isPlaying);
   };
 
+  // Avgör om vi är på mobil (enkel check)
+  const isMobile = window.innerWidth <= 768;
+
   return (
     <>
       <BackgroundMusic audioRef={audioRef} />
-      <ToggleMusic isPlaying={isPlaying} toggleMusic={toggleMusic} />
+      <div
+        className="music-container"
+        onClick={(e) => {
+          e.stopPropagation();
+          if (isMobile) {
+            setShowSlider((prev) => !prev);
+          }
+        }}
+        onMouseEnter={() => {
+          if (!isMobile) setShowSlider(true);
+        }}
+        onMouseLeave={() => {
+          if (!isMobile) setShowSlider(false);
+        }}
+      >
+        <ToggleMusic isPlaying={isPlaying} toggleMusic={toggleMusic} />
+        {showSlider && <VolumeSlider volume={volume} setVolume={setVolume} />}
+      </div>
     </>
   );
 }
