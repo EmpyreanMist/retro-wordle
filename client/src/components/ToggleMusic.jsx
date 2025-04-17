@@ -1,19 +1,21 @@
-function ToggleMusic({ isPlaying, toggleMusic }) {
+function ToggleMusic({ isPlaying, volume, toggleMusic, setShowSlider }) {
+  const handleClick = (e) => {
+    const isMobile = window.innerWidth <= 768;
+    if (!isMobile) {
+      toggleMusic();
+    } else {
+      setShowSlider((prev) => !prev); // På mobil: toggla slidern
+    }
+    e.stopPropagation();
+  };
+
+  // Logik för vilken ikon som ska visas
+  const icon = volume === 0 ? "🔇" : isPlaying ? "🔊" : "🔇";
+
   return (
-    <div className="music-container-button-wrapper">
-      <button
-        id="music-btn"
-        onClick={(e) => {
-          if (window.innerWidth > 768) {
-            // PC = toggla musik
-            toggleMusic();
-          }
-          // Mobil = gör inget här (klick på container sköter slider-visning)
-        }}
-      >
-        {isPlaying ? "🔊" : "🔇"}
-      </button>
-    </div>
+    <button id="music-btn" onClick={handleClick}>
+      {icon}
+    </button>
   );
 }
 

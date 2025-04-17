@@ -66,7 +66,13 @@ function MusicController() {
           if (!isMobile) setShowSlider(false);
         }}
       >
-        <ToggleMusic isPlaying={isPlaying} toggleMusic={toggleMusic} />
+        <ToggleMusic
+          isPlaying={isPlaying}
+          toggleMusic={toggleMusic}
+          volume={volume}
+          setShowSlider={setShowSlider}
+        />
+
         {showSlider && <VolumeSlider volume={volume} setVolume={setVolume} />}
       </div>
     </>
