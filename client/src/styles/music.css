@@ -1,4 +1,3 @@
-/* === Musik-knappens container === */
 .music-container {
   position: fixed;
   bottom: 4rem;
@@ -9,7 +8,6 @@
   align-items: center;
 }
 
-/* === Musik-knappen === */
 #music-btn {
   background-color: #2b2b2b;
   border: none;
@@ -25,15 +23,11 @@
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
 }
 
-/* === Volym-slider container === */
 .volume-slider {
   position: absolute;
-  background: transparent;
   z-index: 101;
-  padding: 8px;
 }
 
-/* === Placering PC === */
 @media (min-width: 769px) {
   .volume-slider {
     bottom: calc(100% + 12px);
@@ -42,7 +36,6 @@
   }
 }
 
-/* === Placering Mobil === */
 @media (max-width: 768px) {
   .music-container {
     top: 1rem;
@@ -51,9 +44,7 @@
   }
 
   .volume-slider {
-    top: calc(100% + 12px);
-    left: 50%;
-    transform: translateX(-50%);
+    display: none;
   }
 
   #music-btn {
@@ -63,12 +54,10 @@
   }
 }
 
-/* === Själva input[type="range"] === */
 .volume-slider input[type="range"] {
-  -webkit-appearance: none;
   appearance: none;
   width: 100px;
-  height: 8px;
+  height: 3rem;
   background: transparent;
   transform: rotate(-90deg);
   transform-origin: center;
@@ -76,52 +65,34 @@
   margin: 0;
 }
 
-/* === Track (linjen bakom) === */
 .volume-slider input[type="range"]::-webkit-slider-runnable-track {
   width: 100%;
-  height: 6px;
-  background: #777;
-  border-radius: 3px;
+  height: 8px;
+  background: green;
+  border-radius: 4px;
 }
 
 .volume-slider input[type="range"]::-moz-range-track {
   width: 100%;
-  height: 6px;
-  background: #777;
-  border-radius: 3px;
+  height: 8px;
+  background: #ccc;
+  border-radius: 4px;
 }
 
-/* === Thumb (knappen) === */
 .volume-slider input[type="range"]::-webkit-slider-thumb {
-  -webkit-appearance: none;
   appearance: none;
   width: 18px;
   height: 18px;
   background: #00ffcc;
   border-radius: 50%;
+  margin-top: -5px;
   border: none;
-  margin-top: -6px; /* centrera på track */
-  transition: background 0.3s, transform 0.3s;
 }
 
 .volume-slider input[type="range"]::-moz-range-thumb {
   width: 18px;
   height: 18px;
   background: #00ffcc;
-  border: none;
   border-radius: 50%;
-  transition: background 0.3s, transform 0.3s;
-}
-
-/* === Hover/focus effekt på thumb === */
-.volume-slider input[type="range"]:hover::-webkit-slider-thumb,
-.volume-slider input[type="range"]:focus::-webkit-slider-thumb {
-  background: #00e6b3;
-  transform: scale(1.1);
-}
-
-.volume-slider input[type="range"]:hover::-moz-range-thumb,
-.volume-slider input[type="range"]:focus::-moz-range-thumb {
-  background: #00e6b3;
-  transform: scale(1.1);
+  border: none;
 }
