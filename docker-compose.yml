@@ -1,0 +1,24 @@
+version: "3.8"
+
+services:
+  mongo:
+    image: mongo:7
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+  webapp:
+    build: .
+    container_name: wordle-app
+    ports:
+      - "5080:5080"
+    depends_on:
+      - mongo
+    environment:
+      - MONGODB_URI=mongodb://mongo:27017/wordle
+      - NODE_ENV=production
+
+volumes:
+  mongo-data:

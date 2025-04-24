@@ -5,14 +5,14 @@ import { fileURLToPath } from "url";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 
-dotenv.config();
-
 const app = express();
 const port = process.env.PORT || 5080;
 
 // __dirname och __filename for ES-modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+dotenv.config({ path: path.resolve(__dirname, "../.env") });
 
 // MongoDB Atlas Connection
 mongoose
@@ -40,7 +40,7 @@ app.get("/scoreboard", async (req, res) => {
     const pageSize = 15;
     const page = parseInt(req.query.page, 10) || 1;
     const length = parseInt(req.query.length, 10);
-    const unique = req.query.unique; // 👈 Lägg till denna rad
+    const unique = req.query.unique;
 
     const filter = {};
 

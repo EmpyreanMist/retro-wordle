@@ -34,7 +34,6 @@ https://retro-wordle.up.railway.app/
 - EJS (SSR scoreboard)
 - Node.js
 
-
 ### API Routes
 
 | Method | Endpoint         | Description                        |
@@ -42,6 +41,36 @@ https://retro-wordle.up.railway.app/
 | GET    | `/api/games`     | Recives guess and returns feedback |
 | POST   | `/api/highscore` | Submits a new highscore to MongoDB |
 | GET    | `/scoreboard`    | Renders the scoreboard page (SSR)  |
+
+## Run with Docker
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/EmpyreanMist/retro-wordle.git
+```
+
+### 2. Create a `.env` file in the project root
+
+```ini
+MONGODB_URI=mongodb://mongo:27017/wordle
+```
+
+### 3. Build and start the app
+
+```bash
+docker-compose up --build
+```
+
+### 4. Open the app
+
+http://localhost:5080
+
+### 5. Stop the app
+
+```bash
+docker-compose down
+```
 
 ---
 
@@ -57,7 +86,7 @@ cd server
 npm install
 ```
 
-### 2. Create a .env file in /server and use a MongoDB URI
+### 2. Create a .env file in the root and use a MongoDB URI
 
 ```ini
 MONGODB_URI=your-mongodb-atlas-connection-string
