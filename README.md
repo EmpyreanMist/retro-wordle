@@ -36,11 +36,11 @@ https://retro-wordle.up.railway.app/
 
 ### API Routes
 
-| Method | Endpoint         | Description                        |
-| ------ | ---------------- | ---------------------------------- |
-| GET    | `/api/games`     | Recives guess and returns feedback |
-| POST   | `/api/highscore` | Submits a new highscore to MongoDB |
-| GET    | `/scoreboard`    | Renders the scoreboard page (SSR)  |
+| Method | Endpoint         | Description                         |
+| ------ | ---------------- | ----------------------------------- |
+| GET    | `/api/games`     | Receives guess and returns feedback |
+| POST   | `/api/highscore` | Submits a new highscore to MongoDB  |
+| GET    | `/scoreboard`    | Renders the scoreboard page (SSR)   |
 
 ## Run with Docker
 
